@@ -36,6 +36,10 @@ void loop() {
   der.write(0);      //Giro a la izquierda
   izq.write(80);
   delay(3000);
+
+  der.write(90);      //Parar
+  izq.write(90);
+  delay(3000);
   
 
 }
