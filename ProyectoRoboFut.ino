@@ -9,7 +9,7 @@ Servo der;
 Servo izq;
 
 void setup() {
-  // put your setup code here, to run once:
+  
 
   der.attach(ServoD);
   izq.attach(ServoI);
@@ -17,10 +17,17 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
   
   der.write(0);         //Hacia adelante
   izq.write(180);
+  
+  delay(3000);
+  
+  der.write(180);      //Hacia atras
+  izq.write(0);
+
+  delay(3000);
   
 
     
