@@ -26,27 +26,30 @@ void loop() {
   if(Serial.available()>0)
   {
     COMANDO = Serial.read();
-
   }
 
   switch(COMANDO)
   {
-    case 'w': 
+    case 'w': case'W':
     der.write(0);         //Hacia adelante
     izq.write(180); 
     break;
-    case 's':
+    
+    case 's': case'S':
     der.write(180);      //Hacia atras
     izq.write(0);
     break;
-    case 'a':
+    
+    case 'a': case'A':
     der.write(100);     //Giro a la derecha
     izq.write(180);
     break;
-    case 'd':
+    
+    case 'd': case'D':
     der.write(0);       //Giro a la izquierda
     izq.write(80);
     break;
+    
     default:
     der.write(90);      //Parar
     izq.write(90);
