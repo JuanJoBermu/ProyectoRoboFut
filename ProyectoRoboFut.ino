@@ -4,13 +4,15 @@
 
 int ServoD = 7;
 int ServoI = 4;
+char COMANDO;
 
 Servo der;
 Servo izq;
 
+
 void setup() {
   
-
+  Serial.begin(9600);
   der.attach(ServoD);
   izq.attach(ServoI);
 
@@ -20,6 +22,13 @@ void loop() {
   
   //der---> adelante (0)
   //izq---> adelante (180)
+
+  if(Serial.available()>0)
+  {
+    COMANDO = Serial.read();
+
+  }
+
   
   der.write(0);         //Hacia adelante
   izq.write(180);       
