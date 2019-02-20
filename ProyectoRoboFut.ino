@@ -29,26 +29,26 @@ void loop() {
 
   }
 
-  
-  der.write(0);         //Hacia adelante
-  izq.write(180);       
-  delay(3000);
-  
-  der.write(180);      //Hacia atras
-  izq.write(0);
-  delay(3000);
-
-  der.write(100);     //Giro a la derecha
-  izq.write(180);
-  delay(3000);
-
-  der.write(0);      //Giro a la izquierda
-  izq.write(80);
-  delay(3000);
-
-  der.write(90);      //Parar
-  izq.write(90);
-  delay(3000);
-  
-
+  switch(COMANDO)
+  {
+    case 'w': 
+    der.write(0);         //Hacia adelante
+    izq.write(180); 
+    break;
+    case 's':
+    der.write(180);      //Hacia atras
+    izq.write(0);
+    break;
+    case 'a':
+    der.write(100);     //Giro a la derecha
+    izq.write(180);
+    break;
+    case 'd':
+    der.write(0);       //Giro a la izquierda
+    izq.write(80);
+    break;
+    default:
+    der.write(90);      //Parar
+    izq.write(90);
+  }
 }
