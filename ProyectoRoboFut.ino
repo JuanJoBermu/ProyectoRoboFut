@@ -41,13 +41,13 @@ void loop() {
     break;
     
     case 'a': case'A':
-    der.write(100);     //Giro a la derecha
-    izq.write(180);
+    der.write(0);       //Giro a la izquierda
+    izq.write(80);
     break;
     
     case 'd': case'D':
-    der.write(0);       //Giro a la izquierda
-    izq.write(80);
+    der.write(100);     //Giro a la derecha
+    izq.write(180);
     break;
     
     default:
