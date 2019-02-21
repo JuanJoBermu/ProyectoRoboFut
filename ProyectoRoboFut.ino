@@ -1,19 +1,29 @@
+
+/*
+HEMERSON LEANDRO ÁLVAREZ RODRÍGUEZ
+JUAN JOSÉ BERMÚDEZ LOPERA
+UNIVERSIDAD DEL QUINDÍO
+PROGRAMA: INGENIERÍA ELECTRÓNICA
+ESPACIO ACADEMICO: PROGRAMACIÓN I
+PROYECTO FINAL: ProyectoRobotFut
+*/
+
 #include<Servo.h>
 #include<SoftwareSerial.h>
-#define TXBT 3
-#define RXBT 2
+#define TXBT 3  //se define el pin 3 para como el tx de la placa de arduino nano
+#define RXBT 2  //se define el pin 3 para como el rx de la placa de arduino nano
 
-SoftwareSerial BT(RXBT,TXBT);
+SoftwareSerial BT(RXBT,TXBT); //se definen pines del bluetooth 
 
-int ServoD = 7;
-int ServoI = 4;
-char COMANDO;
-int velocidad = 90;
-int vel;
-int totd, toti;
+int ServoD = 7;   //se define el pin 7 para el servo derecho
+int ServoI = 4;   //se define el pin 4 para el servo izquierdo
+char COMANDO;     //se define la variable para la comunicacion teclado-bluetooh-arduino
+int velocidad = 90;   //se define la velocidad con un valor inicial de 90
+int vel;    //se define la variable para aumento y disminución de la velocidad
+int totd, toti;   //se defin las variables para la velocidad
 
-Servo der;
-Servo izq;
+Servo der;    //se define el nombre de el servo derecho
+Servo izq;    //se define el nombre del servo izquierdo
 
 
 void setup() {
@@ -39,12 +49,12 @@ void loop() {
   {
     COMANDO = Serial.read();
     Serial.println(COMANDO);
-  }
+  
   
     switch(COMANDO)
       {
 
-        case'+':
+        case'+':    //aumento de velocidad
           vel+=3;
           totd=velocidad-vel;
           toti=velocidad+vel;
@@ -52,6 +62,16 @@ void loop() {
           izq.write(toti);
           if (totd<0){ totd=0;}
           if (toti>180){ toti=180;}
+        break;
+
+        case '-':   //disminucion de velocidad
+          vel-=3;
+          totd=velocidad-vel;
+          toti=velocidad+vel;
+          der.write(totd);
+          izq.write(toti);
+          if (totd>180){totd=180;}
+          if (totd<0){totd=0;}
         break;
         
         case 'w': case'W':
@@ -78,4 +98,5 @@ void loop() {
           der.write(90);      //Parar
           izq.write(90);
       }
+  }
 }
