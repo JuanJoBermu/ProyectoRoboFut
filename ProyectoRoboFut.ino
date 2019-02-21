@@ -1,6 +1,9 @@
-
 #include<Servo.h>
 #include<SoftwareSerial.h>
+#define TXBT 3
+#define RXBT 2
+
+SoftwareSerial BT(RXBT,TXBT);
 
 int ServoD = 7;
 int ServoI = 4;
@@ -13,6 +16,7 @@ Servo izq;
 void setup() {
   
   Serial.begin(9600);
+  BT.begin(9600);
   der.attach(ServoD);
   izq.attach(ServoI);
 
@@ -22,10 +26,14 @@ void loop() {
   
   //der---> adelante (0)
   //izq---> adelante (180)
-
+  if(BT.available()>0)
+  {
+    COMANDO=BT.read();
+  }
   if(Serial.available()>0)
   {
     COMANDO = Serial.read();
+    Serial.println(COMANDO);
   }
   
     switch(COMANDO)
