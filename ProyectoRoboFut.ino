@@ -1,11 +1,11 @@
 
 /*
-HEMERSON LEANDRO ÁLVAREZ RODRÍGUEZ
-JUAN JOSÉ BERMÚDEZ LOPERA
-UNIVERSIDAD DEL QUINDÍO
-PROGRAMA: INGENIERÍA ELECTRÓNICA
-ESPACIO ACADEMICO: PROGRAMACIÓN I
-PROYECTO FINAL: ProyectoRobotFut
+    HEMERSON LEANDRO ÁLVAREZ RODRÍGUEZ
+    JUAN JOSÉ BERMÚDEZ LOPERA
+    UNIVERSIDAD DEL QUINDÍO
+    PROGRAMA: INGENIERÍA ELECTRÓNICA
+    ESPACIO ACADEMICO: PROGRAMACIÓN I
+    PROYECTO FINAL: ProyectoRobotFut
 */
 
 #include<Servo.h>
@@ -17,7 +17,8 @@ SoftwareSerial BT(RXBT,TXBT); //se definen pines del bluetooth
 
 int ServoD = 7;   //se define el pin 7 para el servo derecho
 int ServoI = 4;   //se define el pin 4 para el servo izquierdo
-char COMANDO;     //se define la variable para la comunicacion teclado-bluetooh-arduino
+char COMANDO;     //se define la variable para la comunicacion teclado-arduino
+char DATO;        //se define la variable para la comunicacion bluetooth-arduino
 int velocidad = 90;   //se define la velocidad con un valor inicial de 90
 int vel;    //se define la variable para aumento y disminución de la velocidad
 int totd, toti;   //se defin las variables para la velocidad
@@ -43,19 +44,12 @@ void loop() {
   
   if(BT.available()>0)
   {
-    COMANDO = BT.read();
-  }
-  
-  if(Serial.available()>0)
-  {
-    COMANDO = Serial.read();
-    Serial.println(COMANDO);
-  
-  
-    switch(COMANDO)
-      {
+    DATO = BT.read();
 
-        //CONTROL SERVO IZQUIERDO CON SLIDER
+     switch(DATO)
+       {
+        
+          //CONTROL SERVO IZQUIERDO CON SLIDER
         case 'A': izq.write(0); break; //0
         case 'B': izq.write(9); break; //1
         case 'C': izq.write(18); break; //2
@@ -78,8 +72,7 @@ void loop() {
         case 'T': izq.write(171); break; //19
         case 'U': izq.write(180); break; //20
 
-
-        //CONTROL SERVO DERECHO CON SLIDER
+          //CONTROL SERVO DERECHO CON SLIDER
         case 'a': der.write(180); break; //0
         case 'b': der.write(171); break; //1
         case 'c': der.write(162); break; //2
@@ -101,7 +94,50 @@ void loop() {
         case 's': der.write(18); break; //18
         case 't': der.write(9); break; //19
         case 'u': der.write(0); break; //20
-        
+
+          //CELEBRACION 1
+        case '1':   
+        der.write(0); izq.write(180); delay(500);
+        der.write(160); izq.write(20); delay(500);
+        der.write(40); izq.write(140); delay(500);
+        der.write(120); izq.write(60); delay(500);
+        der.write(80); izq.write(100); delay(500);
+        der.write(180); izq.write(180); delay(1000);
+        der.write(0); izq.write(0); delay(1000);
+        break;
+
+          //CELEBRACION 2
+        case'2':
+        for (velocidad=90, vel=9, i=0; i<10; i++)
+        {
+          der.write(velocidad-vel); izq.write(velocidad-vel); delay(500); vel+=9;
+        }
+        break;
+
+          //CELEBRACION 3
+        case'3':
+        der.write(0); izq.write(70); delay(200);
+        der.write(110); izq.write(180); delay(200);
+        break;
+
+          //ZIG ZAG
+        case'z':
+        der.write(0); izq.write(0); delay(200);
+        der.write(45); izq.write(135); delay(1000);
+        der.write(180); izq.write(180); delay(200);
+        der.write(45); izq.write(135); delay(1000);
+        break;
+
+      }
+  }
+  
+  if(Serial.available()>0)
+  {
+    COMANDO = Serial.read();
+    Serial.println(COMANDO);
+  
+    switch(COMANDO)
+      {
 
         case'+':    //aumento de velocidad
           vel+=3;
@@ -123,40 +159,6 @@ void loop() {
           if (totd<0){totd=0;}
         break;
 
-          //CELEBRACION 1
-        case '1':   
-        der.write(0); izq.write(180); delay(500);
-        der.write(160); izq.write(20); delay(500);
-        der.write(40); izq.write(140); delay(500);
-        der.write(120); izq.write(60); delay(500);
-        der.write(80); izq.write(100); delay(500);
-        der.write(180); izq.write(180); delay(1000);
-        der.write(0); izq.write(0); delay(1000);
-        break;
-
-         //CELEBRACION 2
-        case'2':
-        for (velocidad=90, vel=9, i=0; i<10; i++)
-        {
-          der.write(velocidad-vel); izq.write(velocidad-vel); delay(500); vel+=9;
-        }
-        break;
-
-         //CELEBRACION 3
-        case'3':
-        der.write(0); izq.write(70); delay(200);
-        der.write(110); izq.write(180); delay(200);
-        break;
-
-        //ZIG ZAG
-        case'z':
-        der.write(0); izq.write(0); delay(200);
-        der.write(45); izq.write(135); delay(1000);
-        der.write(180); izq.write(180); delay(200);
-        der.write(45); izq.write(135); delay(1000);
-        break;
-
-        /*
         case 'w': case'W':
           der.write(0);         //Hacia adelante
           izq.write(180); 
@@ -176,7 +178,6 @@ void loop() {
           der.write(100);     //Giro a la derecha
           izq.write(180);
         break;
-        */
     
         default:
           der.write(90);      //Parar
