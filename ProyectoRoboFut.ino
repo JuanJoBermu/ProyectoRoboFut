@@ -54,6 +54,54 @@ void loop() {
     switch(COMANDO)
       {
 
+        //CONTROL SERVO IZQUIERDO CON SLIDER
+        case 'A': izq.write(0); break; //0
+        case 'B': izq.write(9); break; //1
+        case 'C': izq.write(18); break; //2
+        case 'D': izq.write(27); break; //3
+        case 'E': izq.write(36); break; //4
+        case 'F': izq.write(45); break; //5
+        case 'G': izq.write(54); break; //6
+        case 'H': izq.write(63); break; //7
+        case 'I': izq.write(72); break; //8
+        case 'J': izq.write(81); break; //9
+        case 'K': izq.write(90); break; //10
+        case 'L': izq.write(99); break; //11
+        case 'M': izq.write(108); break; //12
+        case 'N': izq.write(117); break; //13
+        case 'O': izq.write(126); break; //14
+        case 'P': izq.write(135); break; //15
+        case 'Q': izq.write(144); break; //16
+        case 'R': izq.write(153); break; //17
+        case 'S': izq.write(162); break; //18
+        case 'T': izq.write(171); break; //19
+        case 'U': izq.write(180); break; //20
+
+
+        //CONTROL SERVO DERECHO CON SLIDER
+        case 'a': der.write(180); break; //0
+        case 'b': der.write(171); break; //1
+        case 'c': der.write(162); break; //2
+        case 'd': der.write(153); break; //3
+        case 'e': der.write(144); break; //4
+        case 'f': der.write(135); break; //5
+        case 'g': der.write(126); break; //6
+        case 'h': der.write(117); break; //7
+        case 'i': der.write(108); break; //8
+        case 'j': der.write(99); break; //9
+        case 'k': der.write(90); break; //10
+        case 'l': der.write(81); break; //11
+        case 'm': der.write(72); break; //12
+        case 'n': der.write(63); break; //13
+        case 'o': der.write(54); break; //14
+        case 'p': der.write(45); break; //15
+        case 'q': der.write(36); break; //16
+        case 'r': der.write(27); break; //17
+        case 's': der.write(18); break; //18
+        case 't': der.write(9); break; //19
+        case 'u': der.write(0); break; //20
+        
+
         case'+':    //aumento de velocidad
           vel+=3;
           totd=velocidad-vel;
@@ -73,7 +121,8 @@ void loop() {
           if (totd>180){totd=180;}
           if (totd<0){totd=0;}
         break;
-        
+
+        /*
         case 'w': case'W':
           der.write(0);         //Hacia adelante
           izq.write(180); 
@@ -93,10 +142,12 @@ void loop() {
           der.write(100);     //Giro a la derecha
           izq.write(180);
         break;
+        */
     
         default:
           der.write(90);      //Parar
           izq.write(90);
+          
       }
   }
 }
