@@ -95,6 +95,9 @@ void loop() {
         case 't': der.write(9); break; //19
         case 'u': der.write(0); break; //20
 
+            //DETENIDO
+        case'0': der.write(90); izq.write(90); break;
+
           //CELEBRACION 1
         case '1':   
         der.write(0); izq.write(180); delay(500);
