@@ -11,7 +11,7 @@ PROYECTO FINAL: ProyectoRobotFut
 #include<Servo.h>
 #include<SoftwareSerial.h>
 #define TXBT 3  //se define el pin 3 para como el tx de la placa de arduino nano
-#define RXBT 2  //se define el pin 3 para como el rx de la placa de arduino nano
+#define RXBT 2  //se define el pin 2 para como el rx de la placa de arduino nano
 
 SoftwareSerial BT(RXBT,TXBT); //se definen pines del bluetooth 
 
@@ -21,6 +21,7 @@ char COMANDO;     //se define la variable para la comunicacion teclado-bluetooh-
 int velocidad = 90;   //se define la velocidad con un valor inicial de 90
 int vel;    //se define la variable para aumento y disminución de la velocidad
 int totd, toti;   //se defin las variables para la velocidad
+int i; //incremento de la celebracion 2
 
 Servo der;    //se define el nombre de el servo derecho
 Servo izq;    //se define el nombre del servo izquierdo
@@ -120,6 +121,39 @@ void loop() {
           izq.write(toti);
           if (totd>180){totd=180;}
           if (totd<0){totd=0;}
+        break;
+
+          //CELEBRACION 1
+        case '1':   
+        der.write(0); izq.write(180); delay(500);
+        der.write(160); izq.write(20); delay(500);
+        der.write(40); izq.write(140); delay(500);
+        der.write(120); izq.write(60); delay(500);
+        der.write(80); izq.write(100); delay(500);
+        der.write(180); izq.write(180); delay(1000);
+        der.write(0); izq.write(0); delay(1000);
+        break;
+
+         //CELEBRACION 2
+        case'2':
+        for (velocidad=90, vel=9, i=0; i<10; i++)
+        {
+          der.write(velocidad-vel); izq.write(velocidad-vel); delay(500); vel+=9;
+        }
+        break;
+
+         //CELEBRACION 3
+        case'3':
+        der.write(0); izq.write(70); delay(200);
+        der.write(110); izq.write(180); delay(200);
+        break;
+
+        //ZIG ZAG
+        case'z':
+        der.write(0); izq.write(0); delay(200);
+        der.write(45); izq.write(135); delay(1000);
+        der.write(180); izq.write(180); delay(200);
+        der.write(45); izq.write(135); delay(1000);
         break;
 
         /*
